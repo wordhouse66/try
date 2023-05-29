@@ -16,7 +16,7 @@
       <td><%= article.description %></td>
       <td><%= link_to "Show this article", article %></td>
       <td><%= link_to "Edit this article", edit_article_path(article) %></td>
-      <td><%= button_to "Delete", article, method: :delete %></td>
+      <td><%= button_to 'Delete', article, method: :delete, data: {confirm: "Are you sure?" } %></td>
     </tr>
   <% end %>
 </table>
