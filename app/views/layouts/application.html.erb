@@ -11,7 +11,13 @@
   </head>
 
   <body>
+    <%= render 'layouts/navigation' %>
+
     <%= render 'layouts/messages' %>
-    <%= yield %>
+    <div class='container' style='padding-top:50px;'>
+      <%= yield %>
+    </div>
+    <%= render 'layouts/footer' %>
+
   </body>
 </html>
