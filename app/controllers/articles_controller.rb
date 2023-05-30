@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     if @article.save
-      flash[:notice] = 'Article successfully created'
+      flash[:success] = 'Article successfully created'
       redirect_to article_path(@article)
     else
       render :new, status: :unprocessable_entity
@@ -26,8 +26,9 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    if @article.update(article_params)
-      redirect_to article_url(@article), notice: 'Article successfully updated'
+    if @article.update(article_params) 
+      flash[:success] = 'Article successfully updated'
+      redirect_to article_url(@article)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -35,7 +36,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
-    flash[:notice] = 'Article successfully destroyed'
+    flash[:danger] = 'Article successfully destroyed'
     redirect_to articles_url
   end
 

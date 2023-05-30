@@ -1,0 +1,21 @@
+<% if obj.errors.any? %>
+  <div class='row'>
+    <div class='col-md-8 col-md-offset-2'>
+      <div class='badge badge-danger'>
+        <div class='badge-heading'>
+          <h2 class='badge-title'>
+            <%= pluralize(obj.errors.count, 'error')%> 
+            prevented the article from being saved:
+          </h2>
+          <div class='badge-body'>
+            <ul>
+              <% obj.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
