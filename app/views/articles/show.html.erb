@@ -1,9 +1,9 @@
 <h2 align="center">Title: <%= @article.title %></h2>
-<div class="well col-xs-8 col-xs-offset-2 ">
+<div class="well col-xs-8 offset-xs-2 ">
   <% if @article.user %>
     <ul class='listing'>
       <div class='row center'>
-        <div class='col-md-4 col-md-offset-4'>
+        <div class='col-md-4 offset-md-4'>
           <li>Created by: </li>
           <li>
             <%= link_to gravatar_for(@article.user), user_path(@article.user) %>
@@ -21,10 +21,12 @@
   <h4 class="center description"><strong>Description:</strong></h4>
   <hr>
   <%= simple_format(@article.description) %>
+  
   <div class='article-actions'>
-    <%= link_to 'Edit', edit_article_path(@article), class: 'btn btn-sm btn-primary' %>
+    <% if logged_in? && current_user == @article.user %>
+      <%= link_to 'Edit', edit_article_path(@article), class: 'btn btn-sm btn-primary' %>
+      <%= link_to 'Delete', @article, class: 'btn btn-sm btn-danger' , turbo_method: :delete, data: {turbo_confirm: "Are you sure?" } %>
+    <% end %>    
     <%= link_to "View all articles", articles_path, class: 'btn btn-sm btn-success'  %>
-
-    <%= button_to 'Delete', @article, class: 'btn btn-sm btn-danger' , method: :delete, data: {confirm: "Are you sure?" } %>
   </div>
 </div>

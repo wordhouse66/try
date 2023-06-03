@@ -1,7 +1,7 @@
 
 <% obj.each do |article| %>
   <div class='row'>
-    <div class='col-md-8 col-md-offset-2'>
+    <div class='col-md-8 offset-md-2'>
       <div class='card' style="margin-bottom: 2rem;">
         <div class="card-body">
           <div class='article-title'>
@@ -15,10 +15,12 @@
                 last updated: <%= time_ago_in_words(article.updated_at) %></small> 
             </div>
           </div>
-          <div class='article-actions'>
-            <%= link_to 'Edit', edit_article_path(article), class: 'btn btn-sm btn-primary' %>
-            <%= button_to 'Delete', article, class: 'btn btn-sm btn-danger' , method: :delete, data: {confirm: "Are you sure?" } %>
-          </div>
+          <% if logged_in? && current_user == article.user %>
+            <div class='article-actions'>
+              <%= link_to 'Edit', edit_article_path(article), class: 'btn btn-sm btn-primary' %>
+              <%= link_to 'Delete', article, class: 'btn btn-sm btn-danger' , turbo_method: :delete, data: {turbo_confirm: "Are you sure?" } %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
