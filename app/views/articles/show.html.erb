@@ -23,7 +23,7 @@
   <%= simple_format(@article.description) %>
   
   <div class='article-actions'>
-    <% if logged_in? && current_user == @article.user %>
+    <% if logged_in? && (current_user == @article.user || current_user.admin?) %>
       <%= link_to 'Edit', edit_article_path(@article), class: 'btn btn-sm btn-primary' %>
       <%= link_to 'Delete', @article, class: 'btn btn-sm btn-danger' , turbo_method: :delete, data: {turbo_confirm: "Are you sure?" } %>
     <% end %>    
