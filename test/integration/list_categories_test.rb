@@ -5,6 +5,7 @@ class ListCategoriestest < ActionDispatch::IntegrationTest
   def setup
     @category = Category.create(name: 'sports')
     @category2 = Category.create(name: 'programming')
+    @user = User.create(username: "john", email: "john@example.com", password: "password", admin: true)
   end
 
   test "should show categories listing" do
@@ -15,6 +16,7 @@ class ListCategoriestest < ActionDispatch::IntegrationTest
   end
 
   test "invalid category submission results in failure" do
+    sign_in_as(@user, "password")
     get new_category_path
     assert_template 'categories/new'
     assert_no_difference 'Category.count' do
